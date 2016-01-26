@@ -9,8 +9,8 @@
   <issue>https://github.com/hkizuna/cordova-plugin-umeng-analytics/issues</issue>
 
   <preference name="UMENGIOSAPPID" />
-  <!-- <preference name="UMENGANDROIDAPPID" /> -->
-  <!-- <preference name="UMENGANDROIDCHANNELID" /> -->
+  <preference name="UMENGANDROIDAPPID" />
+  <preference name="UMENGANDROIDCHANNELID" />
   <!-- required cordova version -->
   <engines>
     <engine name="cordova" version=">=3.9.2" />
@@ -41,5 +41,29 @@
 
     <!-- other required frameworks -->
     <framework src="libz.dylib" />
+  </platform>
+
+  <!-- android -->
+  <platform name="android">
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="UmengAnalytics">
+        <param name="android-package" value="xwang.cordova.umeng.analytics.UmengAnalytics"/>
+        <param name="onload" value="true" />
+      </feature>
+    </config-file>
+    <config-file target="AndroidManifest.xml" parent="/*">
+      <uses-permission android:name="android.permission.INTERNET" />
+      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+      <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+      <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    </config-file>
+    <config-file target="AndroidManifest.xml" parent="/manifest/application">
+      <meta-data android:name="UMENG_APPKEY" android:value="$UMENGANDROIDAPPID">
+      </meta-data>
+      <meta-data android:name="UMENG_CHANNEL" android:value="$UMENGANDROIDCHANNELID">
+      </meta-data>
+    </config-file>
+    <source-file src="src/android/UmengAnalytics.java" target-dir="src/xwang/cordova/umeng/analytics" />
+    <source-file src="src/android/libs/umeng-analytics-v5.6.4.jar" target-dir="libs" />
   </platform>
 </plugin>

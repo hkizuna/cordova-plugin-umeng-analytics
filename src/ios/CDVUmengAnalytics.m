@@ -132,7 +132,7 @@
 - (void)eventWithAttributesAndCounter:(CDVInvokedUrlCommand *)command
 {
     NSArray *arguments = [command arguments];
-    if ([arguments count] != 1) {
+    if ([arguments count] != 3) {
         [self failWithCallbackId:command.callbackId withMessage:@"参数错误"];
         return;
     }
